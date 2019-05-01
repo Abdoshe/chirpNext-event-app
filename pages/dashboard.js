@@ -366,7 +366,7 @@ class Dashboard extends Component {
 
   render() {
     const { classes } = this.props
-    const currDate = new Date().toLocaleString('en-GB')
+    const currDate = new Date() //.toLocaleString('en-GB')
     const ModalComp = (
       <Modal
         open={this.state.modalOpen}
@@ -551,23 +551,25 @@ class Dashboard extends Component {
                   this.state.eventList
                     .sort((el1, el2) => {
                       return (
-                        new Date(el2.data.startDate) -
-                        new Date(el1.data.startDate)
+                        new Date(this.toUKDateString(el2.data.startDate)) -
+                        new Date(this.toUKDateString(el1.data.startDate))
                       )
                     })
                     .filter(el => {
                       if (this.state.upcoming) {
-                        return el.data.startDate >= currDate
+                        return new Date(this.toUKDateString(el.data.startDate)) >= currDate
                       } else if (this.state.passed) {
-                        return el.data.endDate <= currDate
+                        return new Date(this.toUKDateString(el.data.endDate)) <= currDate
                       }
                       return true
                     })
-                    .map((el, i) => (
+                    .map((el, i) => {
+                      return(
                       <Grid key={i} item>
                         <ClassCard
                           key={i}
-                          bgCol={el.data.endDate <= currDate}
+                          bgCol={new Date(this.toUKDateString(el.data.endDate)) <= currDate}
+                          toUKDateString={this.toUKDateString.bind(this)}
                           eventCode={el.id}
                           eventName={el.data.eventName}
                           eventStart={el.data.startDate}
@@ -578,8 +580,7 @@ class Dashboard extends Component {
                           deleteEvent={this.deleteEvent.bind(this)}
                           openModal={this.openModal.bind(this)}
                         />
-                      </Grid>
-                    ))
+                      </Grid>)})
                 ) : (
                   <Typography variant="h2">
                     You have not created any events, yet

@@ -35,12 +35,13 @@ const styles = {
 }
 
 class ClassCard extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.sdk = ''
     this.state = {
       modalOpen: false,
       dialogOpen: false,
+      expired: this.props.bgCol
     }
   }
 
@@ -69,11 +70,15 @@ class ClassCard extends React.Component {
     const chirp = await import('../node_modules/chirpsdk/index')
     const { Chirp } = chirp
     this.sdk = Chirp
+    setInterval(() => {
+      this.setState({
+         expired: new Date(this.props.toUKDateString(this.props.eventEnd)) <= new Date()
+      })
+    }, 5000); // tweak the interval for performance
   }
 
   render() {
     const { classes } = this.props
-    const currDate = new Date().toLocaleString('en-GB')
     return (
       <React.Fragment>
         <AlertDialog
@@ -87,7 +92,7 @@ class ClassCard extends React.Component {
         <Card
           className={classes.card}
           style={
-            this.props.bgCol ? { backgroundColor: 'rgba(250,116,116,0.5)' } : {}
+            this.state.expired ? { backgroundColor: 'rgba(250,116,116,0.5)' } : {}
           }
         >
           <CardContent>
@@ -115,7 +120,7 @@ class ClassCard extends React.Component {
             <Button
               size="small"
               color="primary"
-              disabled={this.props.bgCol}
+              disabled={this.state.expired}
               variant="outlined"
               onClick={e => {
                 this.setState({
@@ -135,7 +140,7 @@ class ClassCard extends React.Component {
             <Button
               size="small"
               color="primary"
-              disabled={this.props.bgCol}
+              disabled={this.state.expired}
               variant="contained"
               onClick={() =>
                 this.props.openModal({
