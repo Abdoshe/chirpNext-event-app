@@ -484,7 +484,7 @@ class Dashboard extends Component {
               justify="space-evenly"
               alignContent="space-around"
             >
-              <Grid item style={{textAlign:'center'}}>
+              <Grid item style={{ textAlign: 'center' }}>
                 <Typography inline variant="subtitle2">
                   FILTER BY:
                 </Typography>
@@ -557,32 +557,46 @@ class Dashboard extends Component {
                     })
                     .filter(el => {
                       if (this.state.upcoming) {
-                        return (new Date(this.toUKDateString(el.data.endDate)) >= currDate)
+                        return (
+                          new Date(this.toUKDateString(el.data.endDate)) >=
+                          currDate
+                        )
                       } else if (this.state.passed) {
-                        return (new Date(this.toUKDateString(el.data.endDate)) <= currDate)
+                        return (
+                          new Date(this.toUKDateString(el.data.endDate)) <=
+                          currDate
+                        )
                       }
                       return true
                     })
                     .map((el, i) => {
-                      return(
-                      <Grid key={i} style={{padding:'0.5em',margin:'2em 0'}}>
-                        <ClassCard
+                      return (
+                        <Grid
                           key={i}
-                          initialExpiry={new Date(this.toUKDateString(el.data.endDate)) <= currDate}
-                          toUKDateString={this.toUKDateString.bind(this)}
-                          eventCode={el.id}
-                          eventName={el.data.eventName}
-                          eventStart={el.data.startDate}
-                          eventDate={el.data.eventDate}
-                          eventEnd={el.data.endDate}
-                          eventLocation={el.data.location}
-                          eventMode={el.data.mode}
-                          deleteEvent={this.deleteEvent.bind(this)}
-                          openModal={this.openModal.bind(this)}
-                        />
-                      </Grid>)})
+                          style={{ padding: '0.5em', margin: '2em 0' }}
+                        >
+                          <ClassCard
+                            key={i}
+                            initialExpiry={
+                              new Date(this.toUKDateString(el.data.endDate)) <=
+                              currDate
+                            }
+                            toUKDateString={this.toUKDateString.bind(this)}
+                            eventCode={el.id}
+                            eventName={el.data.eventName}
+                            eventStart={el.data.startDate}
+                            eventDate={el.data.eventDate}
+                            eventEnd={el.data.endDate}
+                            eventLocation={el.data.location}
+                            eventMode={el.data.mode}
+                            deleteEvent={this.deleteEvent.bind(this)}
+                            openModal={this.openModal.bind(this)}
+                          />
+                        </Grid>
+                      )
+                    })
                 ) : (
-                  <Typography variant="h2" style={{textAlign:"center"}}>
+                  <Typography variant="h2" style={{ textAlign: 'center' }}>
                     You have not created any events, yet
                   </Typography>
                 )

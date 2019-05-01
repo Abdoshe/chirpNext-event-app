@@ -9,19 +9,19 @@ import Button from '@material-ui/core/Button'
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   flex: {
     flexGrow: 1,
-    letterSpacing: "0.2em"
+    letterSpacing: '0.2em',
   },
   nav: {
-    background: "linear-gradient(60deg, #21cbf3, #2196f3)"
+    background: 'linear-gradient(60deg, #21cbf3, #2196f3)',
   },
   button: {
-    margin: "0 0.3em"
-  }
-};
+    margin: '0 0.3em',
+  },
+}
 function NavBar(props) {
   const { classes } = props
   const page = props.page === 'Login' ? '' : props.page

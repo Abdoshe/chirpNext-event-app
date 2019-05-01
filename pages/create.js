@@ -76,7 +76,7 @@ class Create extends Component {
       open: false,
       KSDtested: null,
       formError: 'ERROR',
-      submitted: false
+      submitted: false,
     }
   }
 
@@ -251,7 +251,14 @@ class Create extends Component {
                 <React.Fragment>
                   <Grid item xs={1} sm={3} />
                   <Grid item xs={10} sm={6}>
-                    <Paper className={classes.root} elevation={2} style={{transform:'translate(0%,15vh)',marginBottom:'10vh'}}>
+                    <Paper
+                      className={classes.root}
+                      elevation={2}
+                      style={{
+                        transform: 'translate(0%,15vh)',
+                        marginBottom: '10vh',
+                      }}
+                    >
                       <Typography
                         variant="h2"
                         component="h2"
@@ -317,16 +324,20 @@ class Create extends Component {
                         />
                         <Button
                           variant="contained"
-                          disabled={!this.state.formError == '' || this.state.submitted}
+                          disabled={
+                            !this.state.formError == '' || this.state.submitted
+                          }
                           color="primary"
                           fullWidth
                           style={{ marginTop: '3em', marginLeft: '0' }}
                           onClick={e => {
-                            this.setState({
-                              submitted: true
-                            },this.submitHandler()
-                            )}
-                          }
+                            this.setState(
+                              {
+                                submitted: true,
+                              },
+                              this.submitHandler()
+                            )
+                          }}
                           className={classes.button}
                         >
                           CREATE

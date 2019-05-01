@@ -35,12 +35,12 @@ const styles = {
 
 class ClassCard extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.sdk = ''
     this.state = {
       modalOpen: false,
       dialogOpen: false,
-      expired: this.props.initialExpiry
+      expired: this.props.initialExpiry,
     }
   }
 
@@ -71,19 +71,21 @@ class ClassCard extends React.Component {
     this.sdk = Chirp
     this.interval = setInterval(() => {
       this.setState({
-         expired: new Date(this.props.toUKDateString(this.props.eventEnd)) <= new Date()
+        expired:
+          new Date(this.props.toUKDateString(this.props.eventEnd)) <=
+          new Date(),
       })
-    }, 100); // tweak the interval for performance
+    }, 100) // tweak the interval for performance
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval); 
+    clearInterval(this.interval)
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    if(nextState.dialogOpen !== this.state.dialogOpen) return true;
-    if(nextState.expired !== this.state.expired) return true;
-    return false;
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.dialogOpen !== this.state.dialogOpen) return true
+    if (nextState.expired !== this.state.expired) return true
+    return false
   }
 
   render() {
@@ -101,7 +103,9 @@ class ClassCard extends React.Component {
         <Card
           className={classes.card}
           style={
-            this.state.expired ? { backgroundColor: 'rgba(250,116,116,0.5)' } : {}
+            this.state.expired
+              ? { backgroundColor: 'rgba(250,116,116,0.5)' }
+              : {}
           }
         >
           <CardContent>
