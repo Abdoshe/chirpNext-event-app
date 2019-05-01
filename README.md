@@ -1,4 +1,4 @@
-# Major Project - Next.js App
+# Major Project - Next.js App [ChirpNext-Events](https://chirp-next-app.herokuapp.com/)
 
 ----
 ### For Code Readability:
