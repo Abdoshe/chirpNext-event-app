@@ -366,7 +366,7 @@ class Dashboard extends Component {
 
   render() {
     const { classes } = this.props
-    const currDate = new Date() //.toLocaleString('en-GB')
+    const currDate = new Date()
     const ModalComp = (
       <Modal
         open={this.state.modalOpen}
@@ -484,7 +484,7 @@ class Dashboard extends Component {
               justify="space-evenly"
               alignContent="space-around"
             >
-              <Grid item>
+              <Grid item style={{textAlign:'center'}}>
                 <Typography inline variant="subtitle2">
                   FILTER BY:
                 </Typography>
@@ -542,7 +542,7 @@ class Dashboard extends Component {
               spacing={0}
               direction="row"
               alignItems="baseline"
-              justify="space-evenly"
+              justify="space-around"
               style={{ minHeight: '50vh', marginTop: '4vh' }}
             >
               {ModalComp}
@@ -557,18 +557,18 @@ class Dashboard extends Component {
                     })
                     .filter(el => {
                       if (this.state.upcoming) {
-                        return new Date(this.toUKDateString(el.data.startDate)) >= currDate
+                        return (new Date(this.toUKDateString(el.data.endDate)) >= currDate)
                       } else if (this.state.passed) {
-                        return new Date(this.toUKDateString(el.data.endDate)) <= currDate
+                        return (new Date(this.toUKDateString(el.data.endDate)) <= currDate)
                       }
                       return true
                     })
                     .map((el, i) => {
                       return(
-                      <Grid key={i} item>
+                      <Grid key={i} style={{padding:'0.5em',margin:'2em 0'}}>
                         <ClassCard
                           key={i}
-                          bgCol={new Date(this.toUKDateString(el.data.endDate)) <= currDate}
+                          initialExpiry={new Date(this.toUKDateString(el.data.endDate)) <= currDate}
                           toUKDateString={this.toUKDateString.bind(this)}
                           eventCode={el.id}
                           eventName={el.data.eventName}
@@ -582,7 +582,7 @@ class Dashboard extends Component {
                         />
                       </Grid>)})
                 ) : (
-                  <Typography variant="h2">
+                  <Typography variant="h2" style={{textAlign:"center"}}>
                     You have not created any events, yet
                   </Typography>
                 )

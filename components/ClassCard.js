@@ -14,7 +14,6 @@ import Router from 'next/router'
 
 const styles = {
   card: {
-    minWidth: 320,
     maxWidth: 600,
     border: 'solid 1px dodgerblue',
   },
@@ -41,7 +40,7 @@ class ClassCard extends React.Component {
     this.state = {
       modalOpen: false,
       dialogOpen: false,
-      expired: this.props.bgCol
+      expired: this.props.initialExpiry
     }
   }
 
@@ -70,11 +69,21 @@ class ClassCard extends React.Component {
     const chirp = await import('../node_modules/chirpsdk/index')
     const { Chirp } = chirp
     this.sdk = Chirp
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.setState({
          expired: new Date(this.props.toUKDateString(this.props.eventEnd)) <= new Date()
       })
-    }, 5000); // tweak the interval for performance
+    }, 100); // tweak the interval for performance
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval); 
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextState.dialogOpen !== this.state.dialogOpen) return true;
+    if(nextState.expired !== this.state.expired) return true;
+    return false;
   }
 
   render() {

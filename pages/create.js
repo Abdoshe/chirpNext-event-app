@@ -76,6 +76,7 @@ class Create extends Component {
       open: false,
       KSDtested: null,
       formError: 'ERROR',
+      submitted: false
     }
   }
 
@@ -243,15 +244,14 @@ class Create extends Component {
               container
               spacing={0}
               direction="row"
-              alignItems="center"
-              justify="center"
-              style={{ minHeight: '90vh' }}
+              alignItems="space-around"
+              justify="space-around"
             >
               {this.state.user.email ? (
                 <React.Fragment>
                   <Grid item xs={1} sm={3} />
                   <Grid item xs={10} sm={6}>
-                    <Paper className={classes.root} elevation={2}>
+                    <Paper className={classes.root} elevation={2} style={{transform:'translate(0%,15vh)',marginBottom:'10vh'}}>
                       <Typography
                         variant="h2"
                         component="h2"
@@ -317,13 +317,16 @@ class Create extends Component {
                         />
                         <Button
                           variant="contained"
-                          disabled={!this.state.formError == ''}
+                          disabled={!this.state.formError == '' || this.state.submitted}
                           color="primary"
                           fullWidth
                           style={{ marginTop: '3em', marginLeft: '0' }}
                           onClick={e => {
-                            this.submitHandler()
-                          }}
+                            this.setState({
+                              submitted: true
+                            },this.submitHandler()
+                            )}
+                          }
                           className={classes.button}
                         >
                           CREATE

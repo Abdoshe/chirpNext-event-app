@@ -136,55 +136,62 @@ class Choose extends Component {
               handleLogout={this.handleLogout.bind(this)}
               email={this.state.user.email.includes('srmuniv')}
             />
-            <Grid
-              container
-              spacing={0}
-              direction="row"
-              alignItems="center"
-              justify="space-evenly"
-              style={{ minHeight: '90vh' }}
-            >
               {this.state.user.email.includes('srmuniv') ? (
                 <React.Fragment>
-                  <Grid item>
-                    <Paper elevation={2} className={classes.buttonContainer}>
-                      <Button
-                        variant="contained"
-                        size="large"
-                        className={classes.button}
-                      >
-                        <a className={classes.buttonLink} href={`/create`}>
-                          Create an Event!
-                        </a>
-                      </Button>
-                      <Typography
-                        variant="subtitle1"
-                        align="center"
-                        className={classes.buttonInfoTypo}
-                      >
-                        If you plan to organize an event, pick this option.
-                      </Typography>
-                    </Paper>
-                  </Grid>
-                  <Grid item>
-                    <Paper elevation={2} className={classes.buttonContainer}>
-                      <Button
-                        variant="contained"
-                        size="large"
-                        className={classes.button}
-                      >
-                        <a className={classes.buttonLink} href={`/attend`}>
-                          Attend an Event!
-                        </a>
-                      </Button>
-                      <Typography
-                        variant="subtitle1"
-                        align="center"
-                        className={classes.buttonInfoTypo}
-                      >
-                        If you have an event code, please pick this option.
-                      </Typography>
-                    </Paper>
+                  <Grid
+                    container
+                    spacing={0}
+                    direction="row"
+                    alignItems="center"
+                    justify="space-evenly"
+                    style={{ transform: 'translateY(-50%)', position:'absolute', top:'55%'}}
+                  >
+                    <Grid
+                      style={{padding:'0 1em'}}
+                      item
+                    >
+                      <Paper elevation={2} className={classes.buttonContainer}>
+                        <Button
+                          variant="contained"
+                          size="large"
+                          className={classes.button}
+                        >
+                          <a className={classes.buttonLink} href={`/create`}>
+                            Create an Event!
+                          </a>
+                        </Button>
+                        <Typography
+                          variant="subtitle1"
+                          align="center"
+                          className={classes.buttonInfoTypo}
+                        >
+                          If you plan to organize an event, pick this option.
+                        </Typography>
+                      </Paper>
+                    </Grid>
+                    <Grid
+                      style={{padding:'2em 1em'}}
+                      item
+                    >
+                      <Paper elevation={2} className={classes.buttonContainer}>
+                        <Button
+                          variant="contained"
+                          size="large"
+                          className={classes.button}
+                        >
+                          <a className={classes.buttonLink} href={`/attend`}>
+                            Attend an Event!
+                          </a>
+                        </Button>
+                        <Typography
+                          variant="subtitle1"
+                          align="center"
+                          className={classes.buttonInfoTypo}
+                        >
+                          If you have an event code, please pick this option.
+                        </Typography>
+                      </Paper>
+                    </Grid>
                   </Grid>
                 </React.Fragment>
               ) : this.state.user.email.includes('gmail') ? (
@@ -211,7 +218,6 @@ class Choose extends Component {
               ) : (
                 true
               )}
-            </Grid>
           </React.Fragment>
         ) : (
           <Loader />
